@@ -89,7 +89,7 @@ class VenvFile(VenvPath):
 
                         new_line = line
 
-                    tmp_file.write(new_line.encode(encoding="ascii", errors="surrogateescape"))
+                    tmp_file.write(new_line)
 
             tmp_file.seek(0)
             with open(self.path, 'w', encoding="ascii", errors="surrogateescape") as file_handle:
