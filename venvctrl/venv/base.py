@@ -75,13 +75,13 @@ class VenvFile(VenvPath):
             line_number (int): The line of the file to rewrite. Numbering
                 starts at 0.
         """
-        tmp_file = tempfile.TemporaryFile('w+')
+        tmp_fh, tmp_abs_path = tempfile.mkstemp('w+')
         if not line.endswith(os.linesep):
 
             line += os.linesep
         try:
-
-            with open(self.path, 'r', encoding="ascii", errors="surrogateescape") as file_handle:
+            with os.fdopen(tmp_fh, 'w+', encoding="ascii", errors="surrogateescape") as tmp_file, \
+                    open(self.path, 'r', encoding="ascii", errors="surrogateescape") as file_handle:
 
                 for count, new_line in enumerate(file_handle):
 
@@ -99,7 +99,7 @@ class VenvFile(VenvPath):
                     file_handle.write(new_line)
         finally:
 
-            tmp_file.close()
+            os.remove(tmp_file)
 
 
 class VenvDir(VenvPath):
