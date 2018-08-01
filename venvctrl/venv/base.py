@@ -99,7 +99,7 @@ class VenvFile(VenvPath):
                     file_handle.write(new_line)
         finally:
 
-            os.remove(tmp_file)
+            os.remove(tmp_abs_path)
 
 
 class VenvDir(VenvPath):
