@@ -96,7 +96,7 @@ class VenvFile(VenvPath):
 
                 for new_line in tmp_file:
 
-                    file_handle.write(new_line.encode(encoding="ascii", errors="surrogateescape"))
+                    file_handle.write(new_line)
         finally:
 
             tmp_file.close()
